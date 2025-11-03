@@ -11,7 +11,7 @@ export function AccountStep() {
         description="Preencha os dados de acesso à platafdorma"
       />
 
-      <div className="space-y-4 mt-2">
+      <div className="space-y-4 ">
         <div className="space-y-2">
           <Label htmlFor="email">E-mail</Label>
           <Input id="email" />
