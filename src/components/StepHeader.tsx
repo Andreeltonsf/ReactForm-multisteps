@@ -1,0 +1,13 @@
+interface StepHeaderProps {
+  title: string;
+  description: string;
+}
+
+export function StepHeader({ title, description }: StepHeaderProps) {
+  return (
+    <header>
+      <h1 className="text-2xl font-semibold tracking-tight">{title}</h1>
+      <span className="text-muted-foreground">{description}</span>
+    </header>
+  );
+}

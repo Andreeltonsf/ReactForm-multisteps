@@ -1,10 +1,31 @@
-import { StepperNextButton } from "../Stepper";
+import { Label } from "@radix-ui/react-label";
+import { StepHeader } from "../StepHeader";
+import { StepperFooter, StepperNextButton } from "../Stepper";
+import { Input } from "../ui/input";
 
 export function AccountStep() {
   return (
     <div>
-      AccountStep
-      <StepperNextButton />
+      <StepHeader
+        title="Conta"
+        description="Preencha os dados de acesso à platafdorma"
+      />
+
+      <div className="space-y-4 mt-2">
+        <div className="space-y-2">
+          <Label htmlFor="email">E-mail</Label>
+          <Input id="email" />
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="password">Senha</Label>
+          <Input id="password" type="password" />
+        </div>
+      </div>
+
+      <StepperFooter>
+        <StepperNextButton />
+      </StepperFooter>
     </div>
   );
 }

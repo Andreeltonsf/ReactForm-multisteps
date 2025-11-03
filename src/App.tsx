@@ -6,7 +6,7 @@ import { PersonalDataStep } from "./components/steps/PersonalDataStep";
 
 function App() {
   return (
-    <div className="min-h-screen flex justify-center pt-10">
+    <div className="min-h-screen flex justify-center pt-40">
       <Stepper
         initialStep={1}
         steps={[
