@@ -1,13 +1,7 @@
 import { cn } from "@/lib/utils";
-import { createContext, useCallback, useContext, useState } from "react";
-import { Button } from "./ui/button";
-
-interface StepperContextValue {
-  previousStep: () => void;
-  nextStep: () => void;
-}
-
-const StepperContext = createContext({} as StepperContextValue);
+import { useCallback, useState } from "react";
+import { Button } from "../ui/button";
+import { StepperContext, useStepper } from "./useStepper";
 
 interface StepperProps {
   initialStep?: number;
@@ -53,27 +47,53 @@ export function Stepper({ steps, initialStep = 0 }: StepperProps) {
 
 //Composition Pattern
 
-export function StepperFooter({children}:{children:React.ReactNode}) {
-  return(
-    <footer className="mt-6 flex justify-end gap-2">
-      {children}
-    </footer>
-  )
+export function StepperFooter({ children }: { children: React.ReactNode }) {
+  return <footer className="mt-6 flex justify-end gap-2">{children}</footer>;
 }
 
-export function StepperPreviousButton() {
-  const { previousStep } = useContext(StepperContext);
+export function StepperPreviousButton({
+  size = "sm",
+  type = "button",
+  variant = "secondary",
+
+  preventDefault = false,
+  ...props
+}: Omit<React.ComponentPropsWithoutRef<typeof Button>, "onClick"> & {
+  preventDefault?: boolean;
+}) {
+  const { previousStep } = useStepper();
+
   return (
-    <Button size="sm" variant="secondary" type="button" onClick={previousStep}>
+    <Button
+      size={size}
+      variant={variant}
+      type={type}
+      onClick={!preventDefault ? previousStep : undefined}
+      {...props}
+    >
       Anterior
     </Button>
   );
 }
 
-export function StepperNextButton() {
-  const { nextStep } = useContext(StepperContext);
+export function StepperNextButton({
+  size = "sm",
+  type = "button",
+
+  preventDefault = false,
+  ...props
+}: Omit<React.ComponentPropsWithoutRef<typeof Button>, "onClick"> & {
+  preventDefault?: boolean;
+}) {
+  const { nextStep } = useStepper();
+
   return (
-    <Button size="sm" type="button" onClick={nextStep}>
+    <Button
+      size={size}
+      type={type}
+      onClick={!preventDefault ? nextStep : undefined}
+      {...props}
+    >
       Próximo
     </Button>
   );

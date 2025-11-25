@@ -3,6 +3,7 @@ import { AccountStep } from "./components/steps/AccountStep";
 import { AdressStep } from "./components/steps/AdressStep";
 
 import { PersonalDataStep } from "./components/steps/PersonalDataStep";
+import { Toaster } from "./components/ui/sonner";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           },
         ]}
       />
+      <Toaster />
     </div>
   );
 }
