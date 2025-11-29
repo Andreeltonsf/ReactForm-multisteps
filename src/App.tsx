@@ -2,14 +2,13 @@ import { FormProvider, useForm } from "react-hook-form";
 import { Stepper } from "./components/Stepper";
 import { AccountStep } from "./components/steps/AccountStep";
 import { AccountStepSchema } from "./components/steps/AccountStep/schema";
-import { AdressStep, adressStepSchema } from "./components/steps/AdressStep";
+import { AdressStep } from "./components/steps/AdressStep";
+import { adressStepSchema } from "./components/steps/AdressStep/schema";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import {
-  PersonalDataStep,
-  personalDataStepSchema,
-} from "./components/steps/PersonalDataStep";
+import { PersonalDataStep } from "./components/steps/PersonalDataStep";
+import { personalDataStepSchema } from "./components/steps/PersonalDataStep/schema";
 import { Toaster } from "./components/ui/sonner";
 
 const schema = z.object({

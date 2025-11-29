@@ -3,12 +3,9 @@ import { Label } from "@radix-ui/react-label";
 import { useFormContext } from "react-hook-form";
 import { StepHeader } from "../../StepHeader";
 import { StepperFooter, StepperNextButton } from "../../Stepper";
-import { useStepper } from "../../Stepper/useStepper";
 import { Input } from "../../ui/input";
 
 export function AccountStep() {
-  const { nextStep } = useStepper();
-  
   const form = useFormContext<FormData>();
 
   return (
