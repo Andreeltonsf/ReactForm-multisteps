@@ -1,4 +1,5 @@
 import type { FormData } from "@/App";
+import { useStepper } from "@/components/Stepper/useStepper";
 import { Label } from "@radix-ui/react-label";
 import { useFormContext } from "react-hook-form";
 import { StepHeader } from "../../StepHeader";
@@ -6,7 +7,15 @@ import { StepperFooter, StepperNextButton } from "../../Stepper";
 import { Input } from "../../ui/input";
 
 export function AccountStep() {
+  const { nextStep } = useStepper();
   const form = useFormContext<FormData>();
+
+  async function handleNextStep() {
+    const isValid = await form.trigger("accountStepSchema");
+    if (isValid) {
+      nextStep();
+    }
+  }
 
   return (
     <div>
@@ -20,7 +29,7 @@ export function AccountStep() {
           <Label htmlFor="email">E-mail</Label>
           <Input id="email" {...form.register("accountStepSchema.email")} />
           {form.formState.errors.accountStepSchema?.email && (
-            <small className="text-destructive ">
+            <small className="text-destructive">
               {form.formState.errors.accountStepSchema.email.message}
             </small>
           )}
@@ -42,11 +51,7 @@ export function AccountStep() {
       </div>
 
       <StepperFooter>
-        <StepperNextButton
-          disabled={form.formState.isSubmitting}
-          preventDefault
-          type="submit"
-        />
+        <StepperNextButton onClick={handleNextStep} />
       </StepperFooter>
     </div>
   );

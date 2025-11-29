@@ -60,11 +60,7 @@ export function PersonalDataStep() {
 
       <StepperFooter>
         <StepperPreviousButton />
-        <StepperNextButton
-          disabled={form.formState.isSubmitting}
-          type="submit"
-          preventDefault
-        />
+        <StepperNextButton />
       </StepperFooter>
     </div>
   );

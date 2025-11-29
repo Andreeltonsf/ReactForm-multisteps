@@ -45,7 +45,7 @@ function App() {
 
   return (
     <>
-      <div className="min-h-screen flex justify-center pt-40">
+      <div className="min-h-screen flex justify-center items-center pt-40">
         <FormProvider {...form}>
           <form onSubmit={handleSubmit}>
             <Stepper
@@ -53,7 +53,7 @@ function App() {
               steps={[
                 {
                   label: "Conta",
-                  content: <AccountStep form={form} />,
+                  content: <AccountStep />,
                 },
                 {
                   label: "Dados",

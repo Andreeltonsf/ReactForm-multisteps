@@ -50,9 +50,7 @@ export function AdressStep() {
 
       <StepperFooter>
         <StepperPreviousButton disabled={form.formState.isSubmitting} />
-        <Button disabled={form.formState.isSubmitting} type="submit" size="sm">
-          Finalizar
-        </Button>
+        <Button disabled={form.formState.isSubmitting} type="submit"></Button>
       </StepperFooter>
     </div>
   );
