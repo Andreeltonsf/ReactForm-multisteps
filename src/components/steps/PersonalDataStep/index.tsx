@@ -1,4 +1,5 @@
 import type { FormData } from "@/App";
+import { useStepper } from "@/components/Stepper/useStepper";
 import { useFormContext } from "react-hook-form";
 import { StepHeader } from "../../StepHeader";
 import {
@@ -10,7 +11,16 @@ import { Input } from "../../ui/input";
 import { Label } from "../../ui/label";
 
 export function PersonalDataStep() {
+  const { nextStep } = useStepper();
   const form = useFormContext<FormData>();
+
+  async function handleNextStep() {
+    const isValid = await form.trigger("personalDataStepSchema");
+    if (isValid) {
+      nextStep();
+    }
+  }
+
   return (
     <div>
       <StepHeader
@@ -60,7 +70,7 @@ export function PersonalDataStep() {
 
       <StepperFooter>
         <StepperPreviousButton />
-        <StepperNextButton />
+        <StepperNextButton onClick={handleNextStep} />
       </StepperFooter>
     </div>
   );
