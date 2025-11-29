@@ -1,5 +1,7 @@
+import { safeGetCacheValue } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Label } from "@radix-ui/react-label";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { StepHeader } from "../StepHeader";
@@ -14,20 +16,43 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
+const initialData = safeGetCacheValue<FormData>("account-step");
+
 export function AccountStep() {
   const { nextStep } = useStepper();
 
   const form = useForm<FormData>({
+    disabled: !!initialData,
     resolver: zodResolver(schema),
     defaultValues: {
-      email: "",
-      password: "",
+      email: initialData?.email || "",
+      password: initialData?.password || "",
     },
   });
 
+  useEffect(() => {
+    if (form.formState.isDirty) {
+      window.onbeforeunload = () => {
+        return "Você tem certeza que deseja sair?";
+      };
+
+      return () => {
+        window.onbeforeunload = null;
+      };
+    }
+  }, [form.formState.isDirty]);
+
   const handleSubmit = form.handleSubmit(async (formData) => {
-    console.log(formData);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    if (!initialData) {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      sessionStorage.setItem(
+        "account-step",
+        JSON.stringify({
+          ...formData,
+          password: "*".repeat(formData.password.length),
+        })
+      );
+    }
     nextStep();
   });
   return (

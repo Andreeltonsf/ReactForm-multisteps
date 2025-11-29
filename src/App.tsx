@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="min-h-screen flex justify-center pt-40">
       <Stepper
-        initialStep={1}
+        initialStep={0}
         steps={[
           {
             label: "Conta",
